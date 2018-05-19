@@ -156,17 +156,17 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    if (ADD_COMMAND1.equals(command)) {
   	      // Add subject button clicked
   	    	
-  	    	Add_Subject_Screen_temp asstemp = new Add_Subject_Screen_temp();
+  	    	Print_Add_Subject_Screen_temp asstemp = new Print_Add_Subject_Screen_temp();
   	    	
   	    	//
   	    	for(int i=0; i<5; i++) {
-  	    		System.out.println(Add_Subject_Screen_temp.Subject_Info[i]);
+  	    		System.out.println(Print_Add_Subject_Screen_temp.Subject_Info[i]);
   	    	}
   	    	if(isCreateNewNode.isCreateNewNode==true) {
   	    		
-  	    		subjectList.addObject(""+Add_Subject_Screen_temp.Subject_Info[0]+" "+Add_Subject_Screen_temp.Subject_Info[1]+" "+
-  	    				Add_Subject_Screen_temp.Subject_Info[2]+" "+Add_Subject_Screen_temp.Subject_Info[3]+" "+
-  	    				Add_Subject_Screen_temp.Subject_Info[4] );
+  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+" "+Print_Add_Subject_Screen_temp.Subject_Info[1]+" "+
+  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+" "+Print_Add_Subject_Screen_temp.Subject_Info[3]+" "+
+  	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
   	    		//subjectList.addObject("New Node " + newNodeSuffix++);
   	    	}
   	    	
