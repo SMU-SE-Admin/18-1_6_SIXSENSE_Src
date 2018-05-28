@@ -64,7 +64,9 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 
 public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener {
@@ -521,9 +523,17 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    }
   	  }
   	  
+  	  
+  	  String getTime() {
+  		  long time = System.currentTimeMillis();
+  		  SimpleDateFormat dayTime = new SimpleDateFormat("MM-dd");
+  		  String str = dayTime.format(new Date(time));
+  		  
+  		  return str;
+  	  }
   	  //상태 변경 함수  (ex. 미완료 --> 완료)
   	  public void StatusChange() {
-  		  
+  		  String finishedTime= getTime();
   		  String nodeName="";
   		  TreePath currentSelection = tree.getSelectionPath();
     	    if (currentSelection != null) {
@@ -545,7 +555,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
     	    	for(int i=0; i<5; i++) {
     	    		nodeName = nodeName + nodeNameStr[i] + "/"; 
     	    	}
-    	    	nodeName = nodeName +  nodeNameStr[5];
+    	    	nodeName = nodeName +  finishedTime;
     	    	removeCurrentNode(1);
     	    	
     	    	
@@ -565,7 +575,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
     	    	for(int i=0; i<5; i++) {
     	    		nodeName = nodeName +  nodeNameStr[i] + "/"; 
     	    	}
-    	    	nodeName = nodeName +  nodeNameStr[5];
+    	    	nodeName = nodeName +  "-";
     	    	
     	    	removeCurrentNode(1);
     	    	
