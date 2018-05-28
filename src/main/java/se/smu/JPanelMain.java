@@ -5,7 +5,9 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-public class JPanelMain extends JFrame {
+
+
+public class JPanelMain<Print_Add_Subject_Screen_0515_v1_6_SIXSENSE> extends JFrame {
 	public JPanelMain() {
 		this.setSize(360, 640);
 		Toolkit tk=Toolkit.getDefaultToolkit();
@@ -20,10 +22,9 @@ public class JPanelMain extends JFrame {
 	}
     public Print_Add_Todo1 Paddtodo1 = null; //각화면 클래스를 등록할 예정
     public Print_Add_Todo2 Paddtodo2 = null;
-    public Print_Add_Subject_Screen_0515_v1_6_SIXSENSE Paddsubjectscreen = null;
     public Print_Show_Sorted_List_0514_v1_6_SIXSENSE Pshowsortedlist = null;
     public Print_Login_0510_v1_6_SIXSENSE Printlogin = null;
-    public Print_Subject_List_0511_v1_6_SIXSENSE PsubjectList = null;
+    public Print_Subject_List_0511_v1_6_SIXSENSE PsubjectList = null;    
     
     public void change(String panelName) {
        if(panelName.equals("Print_Add_Todo1")) { //출력할 화면을 재지정
@@ -38,12 +39,7 @@ public class JPanelMain extends JFrame {
           revalidate();
           repaint();
        }
-     else if(panelName.equals("Print_Add_Subject_Screen_0515_v1_6_SIXSENSE")) {
-    	  getContentPane().removeAll();
-           getContentPane().add(Paddsubjectscreen);
-           revalidate();
-           repaint();
-       }
+
        else if(panelName.equals("Print_Show_Sorted_List_0514_v1_6_SIXSENSE")) {
     	   getContentPane().removeAll();
            getContentPane().add(Pshowsortedlist);
@@ -69,12 +65,13 @@ public class JPanelMain extends JFrame {
        main.Printlogin = new Print_Login_0510_v1_6_SIXSENSE(main);
        main.Pshowsortedlist = new Print_Show_Sorted_List_0514_v1_6_SIXSENSE(main);
        main.PsubjectList = new Print_Subject_List_0511_v1_6_SIXSENSE(main);
-       main.Paddsubjectscreen = new Print_Add_Subject_Screen_0515_v1_6_SIXSENSE(main);
+       
        
        main.getContentPane().add(main.Printlogin);
        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        main.setSize(360,640);
        main.setVisible(true);
+       
     }
 	
 }

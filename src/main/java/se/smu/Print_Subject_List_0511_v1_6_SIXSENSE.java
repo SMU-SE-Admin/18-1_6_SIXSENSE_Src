@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -62,37 +63,44 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 
 
-
-
-public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener  {
+public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener {
 	static JPanelMain panel;
 	
 	 private int newNodeSuffix = 1;
-	 private static String ADD_COMMAND1 = "addSubject";
-	 private static String ADD_COMMAND2 = "addTodo";
-	 private static String REMOVE_COMMAND = "remove";
-	 private static String CLEAR_COMMAND = "clear";
-	 private static String MARK_COMMAND = "mark";
+	 static String ADD_COMMAND1 = "addSubject";
+	 static String ADD_COMMAND2 = "addTodo";
+	 static String REMOVE_COMMAND = "remove";
+	 static String CLEAR_COMMAND = "clear";
+	 static String MARK_COMMAND = "mark";
+	 static String EDIT_COMMAND = "edit";
+	 static String SAVE_COMMAND = "save";
+	 static String CHANGE_STATUS_COMMAND = "statusChange";
 	 
 	 private DynamicTree subjectList;
-
+	 
 	Button Add_Subject_Button = new Button("+Subject");
-	Button Subject_List_Button = new Button("과목 목록");
+	Button Save_Button = new Button("\uC800\uC7A5");
 	Button Show_Sorted_List_Button = new Button("정렬 보기");
 	Button Add_todo_Button = new Button("+To Do");
 	Button button = new Button("Mark");
 
 	private String SubjectInfo[];
-	
+	private String TodoInfo[];
 	private Font ButtonFont = new Font("Arial Unicode MS", Font.PLAIN, 12);
 	private Font LableFont = new Font("Arial Unicode MS", Font.PLAIN, 24);
 	private Font TextFont = new Font("Arial Unicode MS", Font.PLAIN, 14);
+	private final Button Edit_Button = new Button("Edit");
 	
+	static String command;
+	static public String temp_ParentName;
 	
 	public Print_Subject_List_0511_v1_6_SIXSENSE(final JPanelMain panel) {
+		
+		
 		setBackground(Color.WHITE);
 		this.panel=panel;
 		setLayout(null);
@@ -108,11 +116,14 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		Add_Subject_Button.addActionListener(this);
 		add(Add_Subject_Button);
 		
-		Subject_List_Button.setForeground(Color.WHITE);
-		Subject_List_Button.setFont(ButtonFont);
-		Subject_List_Button.setBackground(SystemColor.textHighlight);
-		Subject_List_Button.setBounds(20, 560, 80, 40);
-		add(Subject_List_Button);
+		
+		Save_Button.setForeground(Color.WHITE);
+		Save_Button.setFont(ButtonFont);
+		Save_Button.setBackground(SystemColor.textHighlight);
+		Save_Button.setBounds(20, 560, 80, 40);
+		add(Save_Button);
+		Save_Button.setActionCommand(SAVE_COMMAND);
+		Save_Button.addActionListener(this);
 		
 		Show_Sorted_List_Button.addMouseListener(new MouseAdapter() {
 			@Override
@@ -138,6 +149,8 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		
 		subjectList.setPreferredSize(new Dimension(300, 150));
 		subjectList.setBounds(10, 10, 270, 550);
+		
+		
 		add(subjectList);
 		
 		button.setFont(ButtonFont);
@@ -147,36 +160,84 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		button.setActionCommand(MARK_COMMAND);
 		button.addActionListener(this);
 		add(button);
+		
+		Button Delete_Button = new Button("Delete");
+		Delete_Button.setActionCommand(REMOVE_COMMAND);
+		Delete_Button.addActionListener(this);
+		Delete_Button.setFont(new Font("Dialog", Font.PLAIN, 12));
+		Delete_Button.setForeground(Color.WHITE);
+		Delete_Button.setBackground(Color.RED);
+		Delete_Button.setBounds(287, 72, 65, 25);
+		add(Delete_Button);
+		
+		
+		Edit_Button.setFont(new Font("Dialog", Font.PLAIN, 12));
+		Edit_Button.setActionCommand(EDIT_COMMAND);
+		Edit_Button.addActionListener(this);
+		Edit_Button.setForeground(Color.WHITE);
+		Edit_Button.setBackground(Color.BLUE);
+		Edit_Button.setBounds(287, 103, 65, 25);
+		add(Edit_Button);
+		
+		Button Status_Button = new Button("\uC0C1\uD0DC \uBCC0\uACBD");
+		Status_Button.setBackground(Color.GREEN);
+		Status_Button.setFont(new Font("Dialog", Font.PLAIN, 12));
+		Status_Button.setBounds(287, 134, 67, 25);
+		Status_Button.setActionCommand(CHANGE_STATUS_COMMAND);
+		Status_Button.addActionListener(this);
+		add(Status_Button);
 		}
 
 
   	  public void actionPerformed(ActionEvent e) {
-  	    String command = e.getActionCommand();
-
-  	    if (ADD_COMMAND1.equals(command)) {
+  	    command = e.getActionCommand();
+  	    
+  	    if (ADD_COMMAND1.equals(command) ) {
   	      // Add subject button clicked
   	    	
   	    	Print_Add_Subject_Screen_temp asstemp = new Print_Add_Subject_Screen_temp();
   	    	
-  	    	//
-  	    	for(int i=0; i<5; i++) {
-  	    		System.out.println(Print_Add_Subject_Screen_temp.Subject_Info[i]);
-  	    	}
-  	    	if(isCreateNewNode.isCreateNewNode==true) {
+  	    	
+  	    	if(isCreateNewNode.isCreateNewNode==true ) {
   	    		
-  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+" "+Print_Add_Subject_Screen_temp.Subject_Info[1]+" "+
-  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+" "+Print_Add_Subject_Screen_temp.Subject_Info[3]+" "+
+  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[1]+"/"+
+  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[3]+"/"+
   	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
   	    		//subjectList.addObject("New Node " + newNodeSuffix++);
+  	    	}
+  	    	isCreateNewNode.isCreateNewNode=false;
+  	    	
+  	    	for(int i=0; i<5; i++) {
+  	    		Print_Add_Subject_Screen_temp.Subject_Info[i] = "";
   	    	}
   	    	
   	    }
   	    else if (ADD_COMMAND2.equals(command)) {
   	   // Add todo button clicked
-  	    	subjectList.addObject("☆ " + newNodeSuffix++);
+  	    	Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(0);
+  	    	
+  	    	
+  	    	if(isCreateNewNode.isCreateNewNode==true ) {
+  	
+  	    		subjectList.getParentName();
+  	    		String[] tempStrArr = temp_ParentName.split("/");
+  	    		temp_ParentName = tempStrArr[0];
+  	  	    	
+  	    		subjectList.addObject("☆/"+"미완료/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
+  	    				temp_ParentName+ "/" + "-" );
+  	    		 
+  	    		//subjectList.addObject("New Node " + newNodeSuffix++);
+  	    	}
+  	    	isCreateNewNode.isCreateNewNode=false;
+  	    	for(int i=0; i<3; i++) {
+  	    		Print_Add_Edit_Todo_temp.Todo_Info[0]="";
+  	    	}
+  	    	
+  	    	
+  	    	//subjectList.addObject("☆ " + newNodeSuffix++);
   	    } else if (REMOVE_COMMAND.equals(command)) {
   	      // Remove button clicked
-  	    	subjectList.removeCurrentNode();
+  	    	subjectList.removeCurrentNode(0);
   	    } else if (CLEAR_COMMAND.equals(command)) {
   	      // Clear button clicked.
   	    	subjectList.clear();
@@ -187,6 +248,25 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    	subjectList.mark();
   	    	repaint();
   	    }
+  	    else if(EDIT_COMMAND.equals(command)) {
+  	    	subjectList.edit();
+  	    	Print_Add_Edit_Todo_temp.Todo_Info[0]="";
+  	    	Print_Add_Edit_Todo_temp.Todo_Info[1]="";
+  	    	//Print_Add_Edit_Todo_temp.Todo_Info[2]="";
+  	    }
+  	    else if(SAVE_COMMAND.equals(command)) {
+  	    	
+  	    	try {
+				subjectList.saveFile();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+  	    }
+  	    else if(CHANGE_STATUS_COMMAND.equals(command)) {
+  	    	subjectList.StatusChange();
+  	    }
+  	 
   	  }
 
   	  /**
@@ -210,13 +290,14 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	  public static void main(String[] args) {
   	    // Schedule a job for the event-dispatching thread:
   	    // creating and showing this application's GUI.
+  		  
   	    javax.swing.SwingUtilities.invokeLater(new Runnable() {
   	      public void run() {
   	        createAndShowGUI();
   	      }
   	    });
   	  }
-  	}
+  	} //생성자
 
 
   	// package components;
@@ -239,26 +320,43 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 
   	    tree = new JTree(treeModel);
 
-  	  ///checkbox tree
-  	    
-      ///
-  	  tree.setEditable(true);
+  	  tree.setEditable(false);	
   	  DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) tree.getCellRenderer();
   	  render.setClosedIcon(null);
       render.setOpenIcon(null);
       render.setLeafIcon(null);
+      
+      DefaultMutableTreeNode basicNode1 = new DefaultMutableTreeNode("미완료 항목");
+      DefaultMutableTreeNode basicNode2 = new DefaultMutableTreeNode("완료 항목");
+      DefaultMutableTreeNode basicNode3 = new DefaultMutableTreeNode("과목 없음");
+      rootNode.add(basicNode1);
+      rootNode.add(basicNode2);
+      basicNode1.add(basicNode3);
+      
+      tree.scrollPathToVisible(new TreePath(basicNode1.getPath()));
+      tree.scrollPathToVisible(new TreePath(basicNode3.getPath()));
+      
+      try {
+		loadSubject();
+		loadTodo();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      
+  	  JScrollPane scrollPane = new JScrollPane(tree);
+  	  add(scrollPane);
+  	
   	    
-  	    
-  	    JScrollPane scrollPane = new JScrollPane(tree);
-  	    add(scrollPane);
+
   	  }
 
-  	  /** Remove all nodes except the root node. */
+  	  /** Remove all nodes except the root node. **/
   	  public void clear() {
   	    rootNode.removeAllChildren();
   	    treeModel.reload();
   	  }
-  	  
+
   	  public void mark() {
   		
   		DefaultMutableTreeNode node; 
@@ -273,17 +371,58 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 			node.setUserObject(newName);
 		}
   		
-		
+		JOptionPane.showMessageDialog(null, "Successfully Marked.", "Mark", JOptionPane.INFORMATION_MESSAGE);
   	  }
+  	  
+  	  
+  	  //edit 기능 보류. String 읽기
+  	  public void edit() {
+  		DefaultMutableTreeNode node; 
+		node =  (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+		String nodeName = node.getUserObject().toString();
+		
+		String[] editedName = nodeName.split("/");
+		for(int i=0; i<editedName.length; i++)
+		System.out.println(editedName[i]);
+		
+		
+		
+		if( node.getLevel() == 3 ) {
+			for(int i=0; i<2; i++) {
+				Print_Add_Edit_Todo_temp.Todo_Info[i] = editedName[i+2];
+			}
+			Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(1);
+			
+			
+	  	  
+			node.setUserObject(editedName[0] + "/" + editedName[1]  + "/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
+	  	    				editedName[4] + "/" + editedName[5]);
+			treeModel.nodeChanged(node);
+			
+			//node.setUserObject("");
+	  	  }
+  	  }
+  	  
 
   	  /** Remove the currently selected node. */
-  	  public void removeCurrentNode() {
+  	  public void removeCurrentNode(int removeOption) {
+  		  boolean isdeleted=false;
   	    TreePath currentSelection = tree.getSelectionPath();
   	    if (currentSelection != null) {
   	      DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection
   	          .getLastPathComponent());
+  	    	
   	      MutableTreeNode parent = (MutableTreeNode) (currentNode.getParent());
-  	      if (parent != null) {
+  	      if(removeOption != 1) {
+  	      int deleteOption = JOptionPane.showConfirmDialog(null,"정말로 삭제하시겠습니까?", "항목 삭제", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+  	      if(deleteOption == JOptionPane.YES_OPTION)
+  	    		  isdeleted=true;
+  	      }
+  	      else
+	    		  isdeleted=true;
+
+  	      
+  	      if (parent != null && isdeleted == true) {
   	        treeModel.removeNodeFromParent(currentNode);
   	        return;
   	      }
@@ -292,42 +431,66 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    // Either there was no selection, or the root was selected.
   	    toolkit.beep();
   	  }
+  	  
+  	
+  	  
+  	  
 
   	  /** Add child to the currently selected node. */
   	  public DefaultMutableTreeNode addObject(Object child) {
+  		  
   	    DefaultMutableTreeNode parentNode = null;
   	    TreePath parentPath = tree.getSelectionPath();
 
+  	    
+		
+		
   	    if (parentPath == null) {
   	      parentNode = rootNode;
   	    } else {
   	      parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
   	    }
-
+  	
   	    return addObject(parentNode, child, true);
   	  }
 
   	  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
   	      Object child) {
-  	    return addObject(parent, child, false);
+  		  	
+  		 
+  			  return addObject(parent, child, false);		
   	  }
 
   	  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
   	      Object child, boolean shouldBeVisible) {
-  	    DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
-
-  	    if (parent == null) {
-  	      parent = rootNode;
+  
+  		  DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
+  	  
+  	    if (parent == null ) {
+  	      
+  	    	
+  	    	parent = rootNode;
   	    }
-
+		
   	    // It is key to invoke this on the TreeModel, and NOT DefaultMutableTreeNode
-  	    treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
+  	    if( (parent.getLevel() == 1 && rootNode.getIndex(parent) == 0 && parent.getChildCount() < 15 && Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND1))
+  	    		|| (parent.getLevel() == 2 && parent.getChildCount() < 10 &&Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND2)) )
+  	    	
+  	
+  	    	
+  	    	treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
 
   	    // Make sure the user can see the lovely new node.
   	    if (shouldBeVisible) {
   	      tree.scrollPathToVisible(new TreePath(childNode.getPath()));
   	    }
+  	    
+  	    
+  	    
+  	  // Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName = parent.getUserObject().toString();
+  	 //System.out.println( Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
   	    return childNode;
+  	    
   	  }
 
   	  class MyTreeModelListener implements TreeModelListener {
@@ -357,13 +520,267 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    public void treeStructureChanged(TreeModelEvent e) {
   	    }
   	  }
-
+  	  
+  	  //상태 변경 함수  (ex. 미완료 --> 완료)
+  	  public void StatusChange() {
+  		  
+  		  String nodeName="";
+  		  TreePath currentSelection = tree.getSelectionPath();
+    	    if (currentSelection != null) {
+    	      DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection
+    	          .getLastPathComponent());
+    	      nodeName = currentNode.getUserObject().toString();
+    	    }
+    	    
+    	    
+    	    String[] nodeNameStr = nodeName.split("/");
+   
+    	
+    	    if(nodeNameStr[1].equals("미완료")) {
+    	    	//미완료 -> 완료
+   	
+    	    	nodeNameStr[1] = "완료";
+    	    	
+    	    	nodeName = "";
+    	    	for(int i=0; i<5; i++) {
+    	    		nodeName = nodeName + nodeNameStr[i] + "/"; 
+    	    	}
+    	    	nodeName = nodeName +  nodeNameStr[5];
+    	    	removeCurrentNode(1);
+    	    	
+    	    	
+    	    	DefaultMutableTreeNode FinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(1);
+    	    	DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(nodeName);
+    	    	
+    	    	treeModel.insertNodeInto(newNode, FinishedNode, FinishedNode.getChildCount());
+    			//tree.scrollPathToVisible(new TreePath(newNode.getPath()));
+    			
+    	    }
+    	    else {
+    	    	//완료 -> 미완료
+    	    	boolean iscompleted=false;
+    	    	nodeNameStr[1] = "미완료";
+    	    	nodeName = "";
+    	    	
+    	    	for(int i=0; i<5; i++) {
+    	    		nodeName = nodeName +  nodeNameStr[i] + "/"; 
+    	    	}
+    	    	nodeName = nodeName +  nodeNameStr[5];
+    	    	
+    	    	removeCurrentNode(1);
+    	    	
+    	    	
+    	    	DefaultMutableTreeNode UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+    	    	DefaultMutableTreeNode SubjectNode;
+    	    	DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(nodeName);
+    	    	String SubjectName="";
+    	    	String ParentName=nodeNameStr[4];
+    	    	
+    	    	int subjectCount = UnfinishedNode.getChildCount();
+    	    	
+    	    	for(int i=0; i<subjectCount; i++) {
+    	    		SubjectNode = (DefaultMutableTreeNode) UnfinishedNode.getChildAt(i);
+    	    		String temp = SubjectNode.getUserObject().toString();
+    	    		String[] tempStr = temp.split("/");
+    	    		SubjectName = tempStr[0]; 
+    	    		  	    		
+    	    		
+    	    		if(SubjectName.equals(ParentName)) {
+    	    			
+    	    			treeModel.insertNodeInto(newNode, SubjectNode, SubjectNode.getChildCount());
+    	    			tree.scrollPathToVisible(new TreePath(newNode.getPath()));
+    	    			iscompleted = true;
+    	    			break;
+    	    		}    	    		
+    	    	}
+    	    	if(iscompleted == false) {
+    	    		SubjectNode = (DefaultMutableTreeNode) UnfinishedNode.getChildAt(0);
+    	    		treeModel.insertNodeInto(newNode, SubjectNode, SubjectNode.getChildCount());
+	    			tree.scrollPathToVisible(new TreePath(newNode.getPath()));
+    	    	}
+    	    	
+    	    }
+ 
+    	    
+    	   
+  		  
+  	  }
+  	  
+  	  
+  	 public void getParentName() {
+  		 TreePath currentSelection = tree.getSelectionPath();
+   	    if (currentSelection != null) {
+   	      DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection
+   	          .getLastPathComponent());
+   	      Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName = currentNode.getUserObject().toString();
+   	    }
+   	    System.out.println(Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
+   	 
+  	 }
+  	 
+  	  
+  	public void saveFile() throws IOException {
+  		
+  		DefaultMutableTreeNode UnfinishedNode; 
+		UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+  		//node =  (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+		
+		DefaultMutableTreeNode FinishedNode; 
+		FinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(1);
+		
+		DefaultMutableTreeNode SubjectNode; 
+		DefaultMutableTreeNode TodoNode; 
+		
+		//
+		//UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+		
+		String SubjectText = "";
+		String TodoText = "";
+		
+		
+		String PackagePath = Print_Show_Sorted_List_0514_v1_6_SIXSENSE.class.getResource("").getPath();
+		
+		String SubjectTextPath = PackagePath + "Subject.txt";
+		String TodoTextPath = PackagePath + "Todo.txt";
+		System.out.println(SubjectTextPath);
+		System.out.println(TodoTextPath);
+		
+		
+		
+		
+		int subjectCount = UnfinishedNode.getChildCount();
+		
+		for(int i=0; i<subjectCount; i++) {
+			SubjectNode = (DefaultMutableTreeNode) UnfinishedNode.getChildAt(i);
+			int todoCount = SubjectNode.getChildCount();
+			
+			
+				String tempStr1 = "";
+				if(i != 0) {
+					tempStr1 = tempStr1 + SubjectNode.getUserObject().toString();
+					SubjectText = SubjectText + tempStr1 + "\r\n";
+				}
+			
+			for(int j=0; j<todoCount; j++) {
+				TodoNode = (DefaultMutableTreeNode) SubjectNode.getChildAt(j);
+				String tempStr2 = "" + TodoNode.getUserObject().toString();
+				TodoText = TodoText + tempStr2 + "\r\n";	
+			}
+		}
+		
+		int FinishedTodoCount = FinishedNode.getChildCount();
+		for(int i=0; i<FinishedTodoCount; i++) {
+			TodoNode = (DefaultMutableTreeNode) FinishedNode.getChildAt(i);
+			String tempStr2 = "" + TodoNode.getUserObject().toString();
+			TodoText = TodoText + tempStr2 + "\r\n";
+		}
+		
+		FileWriter fw = new FileWriter(SubjectTextPath);
+  		
+  	     fw.write(SubjectText);
+  	     fw.close();
+  	     
+  	    fw = new FileWriter(TodoTextPath);
+	     fw.write(TodoText);
+	     fw.close();
+  	} 
+    	
   	
+    	public void loadSubject() throws IOException{ //txt에서 입력받기 main 시작할때 호출 개행단위로 읽어서 add+todo() 실행
+    		
+    		String PackagePath = Print_Show_Sorted_List_0514_v1_6_SIXSENSE.class.getResource("").getPath();	
+    		String SubjectTextPath = PackagePath + "Subject.txt";
+    	
+  		 BufferedReader br = new BufferedReader(new FileReader(SubjectTextPath));
+  	        while(true) {
+  	            String line = br.readLine();
+  	            if (line==null) break;
+  	            
+  	            DefaultMutableTreeNode UnfinishedNode; 
+  	            UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+  	  		
+  	            DefaultMutableTreeNode SubjectNode = addObject(line); 
+  	            
+  	          treeModel.insertNodeInto(SubjectNode, UnfinishedNode, UnfinishedNode.getChildCount());
+  	          tree.scrollPathToVisible(new TreePath(SubjectNode.getPath()));   
+  	        }
+  	        br.close();
+  	    }
+    	
+    	
+    	public void loadTodo() throws IOException{ //txt에서 입력받기 main 시작할때 호출 개행단위로 읽어서 add+todo() 실행
+    		
+    		String PackagePath = Print_Show_Sorted_List_0514_v1_6_SIXSENSE.class.getResource("").getPath();	
+    		String TodoTextPath = PackagePath + "Todo.txt";
+    		DefaultMutableTreeNode UnfinishedNode; 
+	        UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+	        int SubjectCount = UnfinishedNode.getChildCount();
+	        
+	        DefaultMutableTreeNode FinishedNode; 
+	        FinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(1);
+	        
+	        
+  		 BufferedReader br = new BufferedReader(new FileReader(TodoTextPath));
+  		 String[] tempStr1;
+  		 String ParentName="";
+  		 String SubjectName="";
+  		 String Status="";
+  	        while(true) {
+  	            String line = br.readLine();
+  	            if (line==null) break;
+  	          
+  	            tempStr1 = line.split("/");
+  	            System.out.println(tempStr1.length);
+  	           	Status = tempStr1[1];
+  	            SubjectName = tempStr1[4];
+  	         	boolean isCompleted = false;
+  	            
+  	         	if(Status.equals("미완료")) {
+  	 
+	  	            for(int i=0; i<SubjectCount; i++) {
+	  	            	DefaultMutableTreeNode SubjectNode = (DefaultMutableTreeNode) UnfinishedNode.getChildAt(i);
+	  	            	ParentName = SubjectNode.getUserObject().toString();
+	  	            	
+	  	            	String[] tempStr2 = ParentName.split("/");
+	  	            	ParentName = tempStr2[0];
+	  	            	
+	  	            	
+	  	            	if(SubjectName.equals(ParentName)) {
+	  	            		DefaultMutableTreeNode TodotNode = addObject(line); 
+	  	            		treeModel.insertNodeInto(TodotNode, SubjectNode, SubjectNode.getChildCount());
+	  	            		tree.scrollPathToVisible(new TreePath(TodotNode.getPath()));
+	  	            		isCompleted = true;
+	  	            		break;
+	  	            	}
+	  	            }
+  	         	}
+  	         	else if(Status.equals("완료")) {
+  	         		DefaultMutableTreeNode TodotNode = addObject(line); 
+  	         		treeModel.insertNodeInto(TodotNode, FinishedNode, FinishedNode.getChildCount());
+  	         		isCompleted = true;
+  	         		break;
+  	         	}
+  	         
+  	       if(isCompleted == false) {
+  	            DefaultMutableTreeNode SubjectNode = (DefaultMutableTreeNode) UnfinishedNode.getChildAt(0);
+  	            DefaultMutableTreeNode TodotNode = addObject(line); 
+	           	treeModel.insertNodeInto(TodotNode, SubjectNode, SubjectNode.getChildCount());
+	            tree.scrollPathToVisible(new TreePath(TodotNode.getPath()));
+  	       }
+	            			
+  	            
+  	  		
+  	  
+  	        }
+  	        br.close();
+  	    }
+    	
+    	
+    	
+    	
+  	}
+  	  
 
-      
-  	
-	
-	}
   	
   	
 
