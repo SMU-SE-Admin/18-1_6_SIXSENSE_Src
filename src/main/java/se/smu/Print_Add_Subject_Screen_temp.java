@@ -41,7 +41,17 @@ public class Print_Add_Subject_Screen_temp extends JFrame{
 			Subject_Info[3] = Year_TextField.getText();
 			Subject_Info[4] = Semester_TextField.getText();
 			 
-			isCreateNewNode.isCreateNewNode=true;
+			for(int i=0;i<5;i++) {
+				 if(Subject_Info[i].equals("")) {
+					 JOptionPane.showMessageDialog(null, "모든항목을 입력하세요.");
+					 isCreateNewNode.isCreateNewNode=false;
+					 break;
+				 }
+				 isCreateNewNode.isCreateNewNode=true;
+			}
+			
+				
+			
 		}
 	
 		
