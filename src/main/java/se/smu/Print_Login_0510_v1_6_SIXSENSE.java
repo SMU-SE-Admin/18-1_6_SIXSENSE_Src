@@ -67,12 +67,12 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 		
 		
 		
-	//	lblNewLabel.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("username_icon.png")));
+		lblNewLabel.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("username_icon.png")));
 		lblNewLabel.setBounds(58, 241, 42, 42);
 		add(lblNewLabel);
 		
 		
-		//label.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("passwd_icon.png")));
+		label.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("passwd_icon.png")));
 		label.setBounds(58, 295, 42, 42);
 		add(label);
 		
