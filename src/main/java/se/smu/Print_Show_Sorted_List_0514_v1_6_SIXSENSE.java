@@ -19,8 +19,8 @@ import javax.swing.border.LineBorder;
 
 public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 	JPanelMain panel;
-	JPanel panel_1 = new JPanel();	//클래서스설계서에 없는거
-	JPanel panel_2 = new JPanel();	//클래스 설계서에 없는거 
+	JPanel Unfinished_Panel = new JPanel();	//클래서스설계서에 없는거
+	JPanel Finished_Panel = new JPanel();	//클래스 설계서에 없는거 
 	JLabel Unfinished_todo_Label = new JLabel("\uBBF8\uC644\uB8CC \uD56D\uBAA9");
 	JLabel Finished_todo_Label = new JLabel("\uC644\uB8CC\uB41C \uD56D\uBAA9");
 	String sortPolicy[] = {"정렬기준1", "정렬기준2", "정렬기준3"};	//내용에맞게 바꿔야됨
@@ -35,16 +35,16 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 		this.panel=panel;
 		setLayout(null);		
 		
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(2, 50, 356, 230);
-		add(panel_1);
-		panel_1.setLayout(null);
+		Unfinished_Panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		Unfinished_Panel.setBackground(Color.WHITE);
+		Unfinished_Panel.setBounds(2, 50, 356, 230);
+		add(Unfinished_Panel);
+		Unfinished_Panel.setLayout(null);
 		
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(2, 338, 356, 202);
-		add(panel_2);
+		Finished_Panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		Finished_Panel.setBackground(Color.WHITE);
+		Finished_Panel.setBounds(2, 338, 356, 202);
+		add(Finished_Panel);
 		
 		Unfinished_todo_Label.setFont(LableFont);
 		Unfinished_todo_Label.setBounds(0, 0, 142, 38);
