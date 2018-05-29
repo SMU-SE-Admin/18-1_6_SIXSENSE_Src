@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-
+//부적합 사항 수정 완료
 public class Print_Add_Subject_Screen_temp extends JFrame{
 	static public String[] Subject_Info=new String[5];
 	 boolean addfile;
