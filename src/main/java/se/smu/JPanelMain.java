@@ -12,8 +12,8 @@ public class JPanelMain<Print_Add_Subject_Screen_0515_v1_6_SIXSENSE> extends JFr
 		this.setSize(360, 640);
 		Toolkit tk=Toolkit.getDefaultToolkit();
 		Dimension dim = tk.getScreenSize();
-		int xPos=(dim.width / 2) - (this.getWidth()/2);
-		int yPos=(dim.height / 2) - (this.getHeight()/2);
+		int xPos=dim.width / 2 - this.getWidth()/2;
+		int yPos=dim.height / 2 - this.getHeight()/2;
 		this.setLocation(xPos,yPos);
 		this.setResizable(false);
 		
