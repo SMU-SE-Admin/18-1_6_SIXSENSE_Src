@@ -16,7 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.JList;
-//부적합 사항 수정 완료
+//PMD Rule 위반 수정
 public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 	JPanelMain panel;
 	JPanel Unfinished_Panel = new JPanel();	//클래서스설계서에 없는거
