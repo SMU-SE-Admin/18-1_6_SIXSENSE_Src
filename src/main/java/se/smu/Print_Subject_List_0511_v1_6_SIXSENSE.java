@@ -67,7 +67,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-//부적합 사항 수정 완료
+//PMD Rule 위반 수정
 public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener {
 	static JPanelMain panel;
 	
