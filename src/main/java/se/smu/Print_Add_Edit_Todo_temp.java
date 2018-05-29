@@ -1,20 +1,9 @@
 package se.smu;
 
-import java.awt.event.WindowAdapter;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
-import se.smu.isCreateNewNode;
 
 public class Print_Add_Edit_Todo_temp extends JFrame{
 	static public String[] Todo_Info=new String[2];
