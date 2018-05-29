@@ -12,7 +12,7 @@ import java.awt.Font;
 
 
 
-//부적합 사항 수정 완료
+//PMD Rule 위반 수정
 public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 	JPanelMain panel;
 	private JPasswordField passwordField;
