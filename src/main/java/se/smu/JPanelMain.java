@@ -60,8 +60,9 @@ public class JPanelMain<Print_Add_Subject_Screen_0515_v1_6_SIXSENSE> extends JFr
     public static void main(String[] args) {
        JPanelMain main= new JPanelMain();
        main.setTitle("To Do List_SIXSENSE");
-       //main.Paddtodo1= new Print_Add_Todo1(main); 
+       //ain.Paddtodo1= new Print_Add_Todo1(main); 
        //main.Paddtodo2= new Print_Add_Todo2(main);
+       //
        main.Printlogin = new Print_Login_0510_v1_6_SIXSENSE(main);
        main.Pshowsortedlist = new Print_Show_Sorted_List_0514_v1_6_SIXSENSE(main);
        main.PsubjectList = new Print_Subject_List_0511_v1_6_SIXSENSE(main);
