@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-//부적합 사항 수정 완료
+//PMD Rule 위반 수정
 public class Print_Add_Edit_Todo_temp extends JFrame{
 	static public String[] Todo_Info=new String[2];
 	 boolean addfile;
