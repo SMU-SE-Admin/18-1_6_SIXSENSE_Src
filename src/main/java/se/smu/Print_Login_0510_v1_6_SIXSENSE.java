@@ -1,28 +1,15 @@
 package se.smu;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 import javax.swing.*;
-
-import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
-import com.sun.javafx.scene.input.InputEventUtils;
-
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Arrays;
+import java.awt.Font;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+
 
 
 
@@ -32,7 +19,6 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 	private JFormattedTextField frmtdtxtfldUsernaem;
 	private String username = "sixsense";
 	private String inputUsername;
-	private String inputPasswd;
 	private char[] passwd = new char[] {'6', '6', '6', '6'};
 	
 	JLabel lblNewLabel = new JLabel("New label");
@@ -75,16 +61,19 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 		//label.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("passwd_icon.png")));
 		label.setBounds(58, 295, 42, 42);
 		add(label);
+		lblToDoList.setFont(new Font("Arial", Font.PLAIN, 36));
 		
 		
-		lblToDoList.setFont(new Font("Arial", Font.PLAIN, 40));
-		lblToDoList.setBounds(104, 111, 190, 66);
+		
+		lblToDoList.setBounds(104, 117, 190, 66);
 		add(lblToDoList);
-		
-		
 		lblSixsense.setFont(new Font("Arial", Font.PLAIN, 18));
+		
+		
+		
 		lblSixsense.setBounds(241, 175, 105, 27);
 		add(lblSixsense);
+		btnLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
 		
 		
 		
@@ -113,7 +102,7 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 				}
 			}
 		});
-		btnLogin.setFont(new Font("Arial", Font.PLAIN, 18));
+		
 		btnLogin.setBounds(241, 349, 105, 27);
 		add(btnLogin);
 	}
