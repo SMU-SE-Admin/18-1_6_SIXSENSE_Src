@@ -1,78 +1,77 @@
 package se.smu;
 
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
+
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JList;
+
+
+
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+
 
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 
-import javax.swing.UIManager;
+
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeCellRenderer;
+
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
-import javax.swing.tree.TreeCellEditor;
 
-import javafx.scene.control.cell.CheckBoxTreeCell;
 
-//import dynamicadd.DynamicTree;
+
+
+
+
 
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-//import org.scijava.swing.checkboxtree.CheckBoxNodeData;
-//import org.scijava.swing.checkboxtree.CheckBoxNodeEditor;
-//import org.scijava.swing.checkboxtree.CheckBoxNodeRenderer;
 
-import java.awt.Component;
-import java.awt.EventQueue;
-import javax.swing.AbstractCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellEditor;
-import javax.swing.tree.TreeCellRenderer;
-import javax.swing.JButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+
 import java.util.Date;
 
 
 public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener {
 	static JPanelMain panel;
 	
-	 private int newNodeSuffix = 1;
+	 
 	 static String ADD_COMMAND1 = "addSubject";
 	 static String ADD_COMMAND2 = "addTodo";
 	 static String REMOVE_COMMAND = "remove";
@@ -90,11 +89,11 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 	Button Add_todo_Button = new Button("+To Do");
 	Button button = new Button("Mark");
 
-	private String SubjectInfo[];
-	private String TodoInfo[];
+	
+	
 	private Font ButtonFont = new Font("Arial Unicode MS", Font.PLAIN, 12);
-	private Font LableFont = new Font("Arial Unicode MS", Font.PLAIN, 24);
-	private Font TextFont = new Font("Arial Unicode MS", Font.PLAIN, 14);
+	
+	
 	private final Button Edit_Button = new Button("Edit");
 	
 	static String command;
@@ -130,6 +129,16 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		Show_Sorted_List_Button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				Print_Show_Sorted_List_0514_v1_6_SIXSENSE.wholeTodo = "";
+				Print_Show_Sorted_List_0514_v1_6_SIXSENSE.clearList();
+				try {
+					Print_Show_Sorted_List_0514_v1_6_SIXSENSE.loadTodo();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				panel.change("Print_Show_Sorted_List_0514_v1_6_SIXSENSE");
 			}
 		});
@@ -205,7 +214,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[1]+"/"+
   	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[3]+"/"+
   	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
-  	    		//subjectList.addObject("New Node " + newNodeSuffix++);
+  	    		
   	    	}
   	    	isCreateNewNode.isCreateNewNode=false;
   	    	
@@ -228,7 +237,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    		subjectList.addObject("¡Ù/"+"¹Ì¿Ï·á/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
   	    				temp_ParentName+ "/" + "-" );
   	    		 
-  	    		//subjectList.addObject("New Node " + newNodeSuffix++);
+  	    	
   	    	}
   	    	isCreateNewNode.isCreateNewNode=false;
   	    	for(int i=0; i<3; i++) {
@@ -236,7 +245,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    	}
   	    	
   	    	
-  	    	//subjectList.addObject("¡Ù " + newNodeSuffix++);
+  	    	
   	    } else if (REMOVE_COMMAND.equals(command)) {
   	      // Remove button clicked
   	    	subjectList.removeCurrentNode(0);
@@ -474,7 +483,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    	parent = rootNode;
   	    }
 		
-  	    // It is key to invoke this on the TreeModel, and NOT DefaultMutableTreeNode
+  	  
   	    if( (parent.getLevel() == 1 && rootNode.getIndex(parent) == 0 && parent.getChildCount() < 15 && Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND1))
   	    		|| (parent.getLevel() == 2 && parent.getChildCount() < 10 &&Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND2)) )
   	    	
@@ -482,15 +491,15 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    	
   	    	treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
 
-  	    // Make sure the user can see the lovely new node.
+  
   	    if (shouldBeVisible) {
   	      tree.scrollPathToVisible(new TreePath(childNode.getPath()));
   	    }
   	    
   	    
   	    
-  	  // Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName = parent.getUserObject().toString();
-  	 //System.out.println( Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
+  	  
+
   	    return childNode;
   	    
   	  }
@@ -563,7 +572,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
     	    	DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(nodeName);
     	    	
     	    	treeModel.insertNodeInto(newNode, FinishedNode, FinishedNode.getChildCount());
-    			//tree.scrollPathToVisible(new TreePath(newNode.getPath()));
+    			
     			
     	    }
     	    else {
@@ -633,7 +642,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   		
   		DefaultMutableTreeNode UnfinishedNode; 
 		UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
-  		//node =  (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+  	
 		
 		DefaultMutableTreeNode FinishedNode; 
 		FinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(1);
@@ -641,8 +650,8 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		DefaultMutableTreeNode SubjectNode; 
 		DefaultMutableTreeNode TodoNode; 
 		
-		//
-		//UnfinishedNode = (DefaultMutableTreeNode) rootNode.getChildAt(0);
+	
+		
 		
 		String SubjectText = "";
 		String TodoText = "";
@@ -735,7 +744,10 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   		 String ParentName="";
   		 String SubjectName="";
   		 String Status="";
+  		 int temp = 0;
   	        while(true) {
+  	        	System.out.println(temp);
+  	        	temp++;
   	            String line = br.readLine();
   	            if (line==null) break;
   	          
@@ -768,7 +780,6 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	         		DefaultMutableTreeNode TodotNode = addObject(line); 
   	         		treeModel.insertNodeInto(TodotNode, FinishedNode, FinishedNode.getChildCount());
   	         		isCompleted = true;
-  	         		break;
   	         	}
   	         
   	       if(isCompleted == false) {
