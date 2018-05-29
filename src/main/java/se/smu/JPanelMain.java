@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 
-//부적합 사항 수정 완료
+//PMD Rule 위반 수정
 public class JPanelMain<Print_Add_Subject_Screen_0515_v1_6_SIXSENSE> extends JFrame {
 	public JPanelMain() {
 		this.setSize(360, 640);
