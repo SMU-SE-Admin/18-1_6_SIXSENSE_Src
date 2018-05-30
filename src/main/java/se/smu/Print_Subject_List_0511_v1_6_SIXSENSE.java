@@ -1,9 +1,5 @@
 package se.smu;
 
-
-
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -67,7 +63,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-//PMD Rule 위반 수정
+
 public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements ActionListener {
 	static JPanelMain panel;
 	
@@ -132,7 +128,10 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 				
 				Print_Show_Sorted_List_0514_v1_6_SIXSENSE.wholeTodo = "";
 				Print_Show_Sorted_List_0514_v1_6_SIXSENSE.clearList();
+				
+					
 				try {
+					subjectList.saveFile();
 					Print_Show_Sorted_List_0514_v1_6_SIXSENSE.loadTodo();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
