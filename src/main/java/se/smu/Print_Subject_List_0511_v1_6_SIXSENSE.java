@@ -423,12 +423,12 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	          .getLastPathComponent());
   	    	
   	      MutableTreeNode parent = (MutableTreeNode) (currentNode.getParent());
-  	      if(removeOption != 1) {
+  	      if(removeOption != 1  && currentNode.getLevel() > 1){
   	      int deleteOption = JOptionPane.showConfirmDialog(null,"정말로 삭제하시겠습니까?", "항목 삭제", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
   	      if(deleteOption == JOptionPane.YES_OPTION)
   	    		  isdeleted=true;
   	      }
-  	      else
+  	      else if(removeOption == 1)
 	    		  isdeleted=true;
 
   	      
