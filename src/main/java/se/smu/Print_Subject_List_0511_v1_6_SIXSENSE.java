@@ -204,21 +204,24 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    
   	    if (ADD_COMMAND1.equals(command) ) {
   	      // Add subject button clicked
-  	    	
-  	    	Print_Add_Subject_Screen_temp asstemp = new Print_Add_Subject_Screen_temp();
-  	    	
-  	    	
-  	    	if(isCreateNewNode.isCreateNewNode==true ) {
-  	    		
-  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[1]+"/"+
-  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[3]+"/"+
-  	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
-  	    		
-  	    	}
-  	    	isCreateNewNode.isCreateNewNode=false;
-  	    	
-  	    	for(int i=0; i<5; i++) {
-  	    		Print_Add_Subject_Screen_temp.Subject_Info[i] = "";
+  	    	int currentNodeLevel = subjectList.getCurrentNodeLevel();
+  	    	subjectList.getParentName();
+  	    	if(currentNodeLevel == 1 && temp_ParentName.equals("미완료 항목")) {
+	  	    	Print_Add_Subject_Screen_temp asstemp = new Print_Add_Subject_Screen_temp();
+	  	    	
+	  	    	
+	  	    	if(isCreateNewNode.isCreateNewNode==true ) {
+	  	    		
+	  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[1]+"/"+
+	  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[3]+"/"+
+	  	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
+	  	    		
+	  	    	}
+	  	    	isCreateNewNode.isCreateNewNode=false;
+	  	    	
+	  	    	for(int i=0; i<5; i++) {
+	  	    		Print_Add_Subject_Screen_temp.Subject_Info[i] = "";
+	  	    	}
   	    	}
   	    	
   	    }
@@ -634,7 +637,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
    	          .getLastPathComponent());
    	      Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName = currentNode.getUserObject().toString();
    	    }
-   	    System.out.println(Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
+   	    //System.out.println(Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
    	 
   	 }
   	 
@@ -751,10 +754,10 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   		 String ParentName="";
   		 String SubjectName="";
   		 String Status="";
-  		 int temp = 0;
+  		 //int temp = 0;
   	        while(true) {
-  	        	System.out.println(temp);
-  	        	temp++;
+  	        	//System.out.println(temp);
+  	        	//temp++;
   	            String line = br.readLine();
   	            if (line==null) break;
   	          
