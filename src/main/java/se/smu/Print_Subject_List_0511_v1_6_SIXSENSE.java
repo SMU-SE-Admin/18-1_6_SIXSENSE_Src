@@ -224,26 +224,28 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    }
   	    else if (ADD_COMMAND2.equals(command)) {
   	   // Add todo button clicked
-  	    	Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(0);
-  	    	
-  	    	
-  	    	if(isCreateNewNode.isCreateNewNode==true ) {
-  	
-  	    		subjectList.getParentName();
-  	    		String[] tempStrArr = temp_ParentName.split("/");
-  	    		temp_ParentName = tempStrArr[0];
-  	  	    	
-  	    		subjectList.addObject("☆/"+"미완료/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
-  	    				temp_ParentName+ "/" + "-" );
-  	    		 
+  	    	int currentNodeLevel = subjectList.getCurrentNodeLevel();
+  	    	if(currentNodeLevel == 2) {
+	  	    	Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(0);
+	  	    	
+	  	    	
+	  	    	if(isCreateNewNode.isCreateNewNode==true ) {
+	  	
+	  	    		subjectList.getParentName();
+	  	    		String[] tempStrArr = temp_ParentName.split("/");
+	  	    		temp_ParentName = tempStrArr[0];
+	  	  	    	
+	  	    		subjectList.addObject("☆/"+"미완료/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
+	  	    				temp_ParentName+ "/" + "-" );
+	  	    		 
+	  	    	
+	  	    	}
+	  	    	isCreateNewNode.isCreateNewNode=false;
+	  	    	for(int i=0; i<3; i++) {
+	  	    		Print_Add_Edit_Todo_temp.Todo_Info[0]="";
+	  	    	}
   	    	
   	    	}
-  	    	isCreateNewNode.isCreateNewNode=false;
-  	    	for(int i=0; i<3; i++) {
-  	    		Print_Add_Edit_Todo_temp.Todo_Info[0]="";
-  	    	}
-  	    	
-  	    	
   	    	
   	    } else if (REMOVE_COMMAND.equals(command)) {
   	      // Remove button clicked
@@ -635,6 +637,12 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
    	    System.out.println(Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
    	 
   	 }
+  	 
+  	public int getCurrentNodeLevel() {
+  		DefaultMutableTreeNode node =  
+  				(DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+  		return node.getLevel();
+  	}
   	 
   	  
   	public void saveFile() throws IOException {
