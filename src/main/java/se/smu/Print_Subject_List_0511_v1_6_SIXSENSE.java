@@ -380,8 +380,8 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 			String newName = nodeName.replaceFirst("¡Ú", "¡Ù");
 			node.setUserObject(newName);
 		}
-  		
-		JOptionPane.showMessageDialog(null, "Successfully Marked.", "Mark", JOptionPane.INFORMATION_MESSAGE);
+  		if(node.getLevel() == 3)
+  			JOptionPane.showMessageDialog(null, "Successfully Marked.", "Mark", JOptionPane.INFORMATION_MESSAGE);
   	  }
   	  
   	  
