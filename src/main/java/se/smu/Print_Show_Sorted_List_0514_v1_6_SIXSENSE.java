@@ -16,11 +16,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 	JPanelMain panel;
-	JPanel Unfinished_Panel = new JPanel();	//클래서스설계서에 없는거
-	JPanel Finished_Panel = new JPanel();	//클래스 설계서에 없는거 
 	JLabel Unfinished_todo_Label = new JLabel("\uBBF8\uC644\uB8CC \uD56D\uBAA9");
 	JLabel Finished_todo_Label = new JLabel("\uC644\uB8CC\uB41C \uD56D\uBAA9");
 	String sortPolicy[] = {"과목 명", "마감 기한", "실제 마감일"};	
@@ -29,8 +28,7 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 	
 	static DefaultListModel<String> UnfinishedModel = new DefaultListModel();
 	static DefaultListModel<String> FinishedModel = new DefaultListModel();
-	private Font ButtonFont = new Font("Arial Unicode MS", Font.PLAIN, 12);
-	private Font LableFont = new Font("Arial Unicode MS", Font.PLAIN, 24);
+	
 	
 	JList Unfinished_List = new JList(UnfinishedModel);
 	JList Finished_List = new JList(FinishedModel);
@@ -53,31 +51,10 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 		splitTodos();
 		
 		
-		Unfinished_Panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		Unfinished_Panel.setBackground(Color.WHITE);
-		Unfinished_Panel.setBounds(2, 50, 356, 230);
-		add(Unfinished_Panel);
-		Unfinished_Panel.setLayout(null);
-		Unfinished_List.setFont(new Font("Dialog", Font.PLAIN, 15));
-		Unfinished_List.setBounds(0, 0, 356, 230);
-		
-		Unfinished_Panel.add(Unfinished_List);
-		
-		Finished_Panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		Finished_Panel.setBackground(Color.WHITE);
-		Finished_Panel.setBounds(2, 338, 356, 202);
-		add(Finished_Panel);
-		Finished_Panel.setLayout(null);
-		Finished_List.setFont(new Font("Dialog", Font.PLAIN, 15));
-		Finished_List.setBounds(0, 0, 356, 202);
-		
-		Finished_Panel.add(Finished_List);
-		
-		Unfinished_todo_Label.setFont(LableFont);
 		Unfinished_todo_Label.setBounds(0, 0, 142, 38);
 		add(Unfinished_todo_Label);
 		
-		Finished_todo_Label.setFont(LableFont);
+		
 		Finished_todo_Label.setBounds(0, 292, 142, 38);
 		add(Finished_todo_Label);
 		
@@ -100,11 +77,23 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 				
 			}
 		});
-		Prev_Button.setFont(ButtonFont);
+		
 		Prev_Button.setForeground(SystemColor.textHighlightText);
 		Prev_Button.setBackground(SystemColor.textHighlight);
 		Prev_Button.setBounds(0, 560, 100, 40);
 		add(Prev_Button);
+		
+		JScrollPane Unfinished_scrollPane = new JScrollPane();
+		Unfinished_scrollPane.setBounds(0, 50, 356, 214);
+		add(Unfinished_scrollPane);
+		Unfinished_scrollPane.setViewportView(Unfinished_List);
+		Unfinished_List.setFont(new Font("Dialog", Font.PLAIN, 15));
+		
+		JScrollPane Finished_scrollPane = new JScrollPane();
+		Finished_scrollPane.setBounds(0, 328, 356, 214);
+		add(Finished_scrollPane);
+		Finished_scrollPane.setViewportView(Finished_List);
+		Finished_List.setFont(new Font("Dialog", Font.PLAIN, 15));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 360, 640);
 		
@@ -242,9 +231,4 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 		 
 		 
 	}
-	
-	
-	
-	
-	
 }
