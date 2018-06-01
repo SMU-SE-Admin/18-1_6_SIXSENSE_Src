@@ -4,12 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class Print_Add_Edit_Todo_temp extends JFrame{
+public class Print_Add_Edit_Todo_0520_v1_6_SIXSENSE extends JFrame{
 	static public String[] Todo_Info=new String[2];
 	 boolean addfile;
 	
 	
-	public Print_Add_Edit_Todo_temp(int addOrEdit) {
+	public Print_Add_Edit_Todo_0520_v1_6_SIXSENSE(int addOrEdit) {
 		// TODO Auto-generated constructor stub
 		JTextField Todo_Name_TextField = new JTextField();
 		JTextField Todo_Deadline_TextField = new JTextField();
