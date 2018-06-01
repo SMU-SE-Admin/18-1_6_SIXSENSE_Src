@@ -1,7 +1,5 @@
 package se.smu;
 
-
-
 import javax.swing.*;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
@@ -11,69 +9,63 @@ import java.awt.Font;
 
 
 
-
-//PMD Rule 위반 수정
 public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 	JPanelMain panel;
-	private JPasswordField passwordField;
-	private JFormattedTextField frmtdtxtfldUsernaem;
+	private JPasswordField password_TextField;
+	private JFormattedTextField Id_TextField;
 	private String username = "sixsense";
 	private String inputUsername;
 	private char[] passwd = new char[] {'6', '6', '6', '6'};
 	
-	JLabel lblNewLabel = new JLabel("New label");
-	JLabel label = new JLabel("New label");
-	JLabel lblToDoList = new JLabel("To Do List");
-	JLabel lblSixsense = new JLabel("SIXSENSE");
-	JButton btnLogin = new JButton("Login");
+	JLabel ID_Label = new JLabel("ID");
+	JLabel Passwd_Label = new JLabel("Password");
+	JLabel Title = new JLabel("To Do List");
+	JLabel Subtitle = new JLabel("SIXSENSE");
+	JButton Login_Button = new JButton("Login");
 	
 	public Print_Login_0510_v1_6_SIXSENSE(final JPanelMain panel) {
 		setBackground(SystemColor.window);
 		this.panel=panel;
 		setLayout(null);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(104, 295, 212, 42);
-		add(passwordField);
+		password_TextField = new JPasswordField();
+		password_TextField.setBounds(104, 295, 212, 42);
+		add(password_TextField);
 		 
-		final char[] inputPassword = passwordField.getPassword();
+		final char[] inputPassword = password_TextField.getPassword();
 		if (Arrays.equals(passwd, inputPassword)) {
 		    Logincase.passwd_eq=1;
 		} else {
 		    Logincase.passwd_eq=0;
 		}
 		
-		frmtdtxtfldUsernaem = new JFormattedTextField();
-		frmtdtxtfldUsernaem.setText("username");
-		frmtdtxtfldUsernaem.setBounds(104, 241, 212, 42);
-		
-		System.out.println();
-		add(frmtdtxtfldUsernaem);
 		
 		
+		Id_TextField = new JFormattedTextField();
+		Id_TextField.setText("username");
+		Id_TextField.setBounds(104, 241, 212, 42);
+		add(Id_TextField);
+		ID_Label.setFont(new Font("Dialog", Font.BOLD, 15));
+		
+			
+		ID_Label.setBounds(24, 241, 42, 42);
+		add(ID_Label);
+		Passwd_Label.setFont(new Font("Dialog", Font.BOLD, 15));
 		
 		
-		//lblNewLabel.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("username_icon.png")));
-		lblNewLabel.setBounds(58, 241, 42, 42);
-		add(lblNewLabel);
+		Passwd_Label.setBounds(24, 295, 76, 42);
+		add(Passwd_Label);
+		Title.setFont(new Font("Arial", Font.PLAIN, 36));
 		
 		
-		//label.setIcon(new ImageIcon(Print_Login_0510_v1_6_SIXSENSE.class.getResource("passwd_icon.png")));
-		label.setBounds(58, 295, 42, 42);
-		add(label);
-		lblToDoList.setFont(new Font("Arial", Font.PLAIN, 36));
+		Title.setBounds(104, 117, 190, 66);
+		add(Title);
+		Subtitle.setFont(new Font("Arial", Font.PLAIN, 18));
 		
 		
-		
-		lblToDoList.setBounds(104, 117, 190, 66);
-		add(lblToDoList);
-		lblSixsense.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		
-		
-		lblSixsense.setBounds(241, 175, 105, 27);
-		add(lblSixsense);
-		btnLogin.setFont(new Font("Dialog", Font.PLAIN, 15));
+		Subtitle.setBounds(241, 175, 105, 27);
+		add(Subtitle);
+		Login_Button.setFont(new Font("Dialog", Font.PLAIN, 15));
 		
 		
 		
@@ -82,13 +74,13 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 		
 
 		
-		btnLogin.addMouseListener(new MouseAdapter() {
+		Login_Button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				inputUsername = frmtdtxtfldUsernaem.getText();
+				inputUsername = Id_TextField.getText();
 				boolean logincase;
-				boolean isEqualPasswd = Arrays.equals(passwd, passwordField.getPassword());
-				System.out.println(inputUsername);
+				boolean isEqualPasswd = Arrays.equals(passwd, password_TextField.getPassword());
+				
 				if(username.equals(inputUsername) && isEqualPasswd)
 					logincase = true;
 				else 
@@ -103,8 +95,8 @@ public class Print_Login_0510_v1_6_SIXSENSE extends JPanel {
 			}
 		});
 		
-		btnLogin.setBounds(241, 349, 105, 27);
-		add(btnLogin);
+		Login_Button.setBounds(241, 349, 105, 27);
+		add(Login_Button);
 	}
 
 
