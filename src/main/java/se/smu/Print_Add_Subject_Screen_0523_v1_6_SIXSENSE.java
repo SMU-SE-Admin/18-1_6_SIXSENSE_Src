@@ -7,8 +7,7 @@ import javax.swing.JTextField;
 public class Print_Add_Subject_Screen_0523_v1_6_SIXSENSE extends JFrame{
 	static public String[] Subject_Info=new String[5];
 	 boolean addfile;
-	
-	
+		
 	public Print_Add_Subject_Screen_0523_v1_6_SIXSENSE() {
 		// TODO Auto-generated constructor stub
 		JTextField Subject_Name_TextField = new JTextField();
@@ -42,16 +41,7 @@ public class Print_Add_Subject_Screen_0523_v1_6_SIXSENSE extends JFrame{
 				 }
 				 isCreateNewNode.isCreateNewNode=true;
 			}
-			
-				
-			
-		}
-	
-		
-	}
-	
-	
-	
-	
+		}	
+	}				
 }
 
