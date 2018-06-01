@@ -112,11 +112,9 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 			// TODO Auto-generated method stub
 			Sort_Standard_Combobox =  (JComboBox) e.getSource();
 			int index = Sort_Standard_Combobox.getSelectedIndex();
-			System.out.println(wholeTodo);
+			
 			splitTodos();
-			for(int i=0; i<Todos.length; i++) {
-			System.out.println(Todos[i] + "\n");
-			}
+			
 			changeComponentsLocation(index);
 			clearList();
 			updateList();
@@ -161,7 +159,7 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 	    }
 	
 	public void splitTodos() {
-		System.out.println("wholeTodo : " + wholeTodo);
+		
 		Todos = wholeTodo.split(";");
 	}
 		
@@ -205,12 +203,10 @@ public class Print_Show_Sorted_List_0514_v1_6_SIXSENSE extends JPanel{
 		 String[] tempStr1;
 		 String Status="";
 		 
-		 System.out.println(Todos.length);
+		
+		 
 		 Arrays.sort(Todos);
 		 
-		 for(int i=0; i<Todos.length; i++) {
-			 System.out.println(Todos[i]);
-		 }
 		 for(int i=0; i<Todos.length; i++) {
 		
 			 tempStr1 = Todos[i].split("/");
