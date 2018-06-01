@@ -207,20 +207,20 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    	int currentNodeLevel = subjectList.getCurrentNodeLevel();
   	    	subjectList.getParentName();
   	    	if(currentNodeLevel == 1 && temp_ParentName.equals("미완료 항목")) {
-	  	    	Print_Add_Subject_Screen_temp asstemp = new Print_Add_Subject_Screen_temp();
+	  	    	Print_Add_Subject_Screen_0523_v1_6_SIXSENSE asstemp = new Print_Add_Subject_Screen_0523_v1_6_SIXSENSE();
 	  	    	
 	  	    	
 	  	    	if(isCreateNewNode.isCreateNewNode==true ) {
 	  	    		
-	  	    		subjectList.addObject(""+Print_Add_Subject_Screen_temp.Subject_Info[0]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[1]+"/"+
-	  	    				Print_Add_Subject_Screen_temp.Subject_Info[2]+"/"+Print_Add_Subject_Screen_temp.Subject_Info[3]+"/"+
-	  	    				Print_Add_Subject_Screen_temp.Subject_Info[4] );
+	  	    		subjectList.addObject(""+Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[0]+"/"+Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[1]+"/"+
+	  	    				Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[2]+"/"+Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[3]+"/"+
+	  	    				Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[4] );
 	  	    		
 	  	    	}
 	  	    	isCreateNewNode.isCreateNewNode=false;
 	  	    	
 	  	    	for(int i=0; i<5; i++) {
-	  	    		Print_Add_Subject_Screen_temp.Subject_Info[i] = "";
+	  	    		Print_Add_Subject_Screen_0523_v1_6_SIXSENSE.Subject_Info[i] = "";
 	  	    	}
   	    	}
   	    	
@@ -229,7 +229,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	   // Add todo button clicked
   	    	int currentNodeLevel = subjectList.getCurrentNodeLevel();
   	    	if(currentNodeLevel == 2) {
-	  	    	Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(0);
+	  	    	Print_Add_Edit_Todo_0520_v1_6_SIXSENSE attemp = new Print_Add_Edit_Todo_0520_v1_6_SIXSENSE(0);
 	  	    	
 	  	    	
 	  	    	if(isCreateNewNode.isCreateNewNode==true ) {
@@ -238,14 +238,14 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 	  	    		String[] tempStrArr = temp_ParentName.split("/");
 	  	    		temp_ParentName = tempStrArr[0];
 	  	  	    	
-	  	    		subjectList.addObject("☆/"+"미완료/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
+	  	    		subjectList.addObject("☆/"+"미완료/" + Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[0]+"/"+Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[1]+"/"+
 	  	    				temp_ParentName+ "/" + "-" );
 	  	    		 
 	  	    	
 	  	    	}
 	  	    	isCreateNewNode.isCreateNewNode=false;
 	  	    	for(int i=0; i<3; i++) {
-	  	    		Print_Add_Edit_Todo_temp.Todo_Info[0]="";
+	  	    		Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[0]="";
 	  	    	}
   	    	
   	    	}
@@ -265,8 +265,8 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    }
   	    else if(EDIT_COMMAND.equals(command)) {
   	    	subjectList.edit();
-  	    	Print_Add_Edit_Todo_temp.Todo_Info[0]="";
-  	    	Print_Add_Edit_Todo_temp.Todo_Info[1]="";
+  	    	Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[0]="";
+  	    	Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[1]="";
   	    	//Print_Add_Edit_Todo_temp.Todo_Info[2]="";
   	    }
   	    else if(SAVE_COMMAND.equals(command)) {
@@ -397,20 +397,18 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
 		String nodeName = node.getUserObject().toString();
 		
 		String[] editedName = nodeName.split("/");
-		for(int i=0; i<editedName.length; i++)
-		System.out.println(editedName[i]);
 		
 		
 		
 		if( node.getLevel() == 3 ) {
 			for(int i=0; i<2; i++) {
-				Print_Add_Edit_Todo_temp.Todo_Info[i] = editedName[i+2];
+				Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[i] = editedName[i+2];
 			}
-			Print_Add_Edit_Todo_temp attemp = new Print_Add_Edit_Todo_temp(1);
+			Print_Add_Edit_Todo_0520_v1_6_SIXSENSE attemp = new Print_Add_Edit_Todo_0520_v1_6_SIXSENSE(1);
 			
 			
 	  	  
-			node.setUserObject(editedName[0] + "/" + editedName[1]  + "/" + Print_Add_Edit_Todo_temp.Todo_Info[0]+"/"+Print_Add_Edit_Todo_temp.Todo_Info[1]+"/"+
+			node.setUserObject(editedName[0] + "/" + editedName[1]  + "/" + Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[0]+"/"+Print_Add_Edit_Todo_0520_v1_6_SIXSENSE.Todo_Info[1]+"/"+
 	  	    				editedName[4] + "/" + editedName[5]);
 			treeModel.nodeChanged(node);
 			
@@ -488,7 +486,7 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   	    }
 		
   	  
-  	    if( (parent.getLevel() == 1 && rootNode.getIndex(parent) == 0 && parent.getChildCount() < 15 && Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND1))
+  	    if( (parent.getLevel() == 1 && rootNode.getIndex(parent) == 0 && parent.getChildCount() < 16 && Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND1))
   	    		|| (parent.getLevel() == 2 && parent.getChildCount() < 10 &&Print_Subject_List_0511_v1_6_SIXSENSE.command.equals(Print_Subject_List_0511_v1_6_SIXSENSE.ADD_COMMAND2)) )
   	    	
   	
@@ -637,7 +635,6 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
    	          .getLastPathComponent());
    	      Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName = currentNode.getUserObject().toString();
    	    }
-   	    //System.out.println(Print_Subject_List_0511_v1_6_SIXSENSE.temp_ParentName);
    	 
   	 }
   	 
@@ -754,15 +751,14 @@ public class Print_Subject_List_0511_v1_6_SIXSENSE extends JPanel implements Act
   		 String ParentName="";
   		 String SubjectName="";
   		 String Status="";
-  		 //int temp = 0;
+  		
   	        while(true) {
-  	        	//System.out.println(temp);
-  	        	//temp++;
+  	        	
   	            String line = br.readLine();
   	            if (line==null) break;
   	          
   	            tempStr1 = line.split("/");
-  	            System.out.println(tempStr1.length);
+  	    
   	           	Status = tempStr1[1];
   	            SubjectName = tempStr1[4];
   	         	boolean isCompleted = false;
