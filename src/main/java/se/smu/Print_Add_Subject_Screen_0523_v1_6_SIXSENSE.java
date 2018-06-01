@@ -4,13 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-//PMD Rule 위반 수정
-public class Print_Add_Subject_Screen_temp extends JFrame{
+public class Print_Add_Subject_Screen_0523_v1_6_SIXSENSE extends JFrame{
 	static public String[] Subject_Info=new String[5];
 	 boolean addfile;
 	
 	
-	public Print_Add_Subject_Screen_temp() {
+	public Print_Add_Subject_Screen_0523_v1_6_SIXSENSE() {
 		// TODO Auto-generated constructor stub
 		JTextField Subject_Name_TextField = new JTextField();
 		JTextField Professor_Name_TextField = new JTextField();
